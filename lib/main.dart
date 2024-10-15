@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:matlingo/lesson_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +10,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+    return MaterialApp(
+      theme: ThemeData(
+        colorScheme: const ColorScheme.dark(
+          primary: Colors.blue,
+          inverseSurface: Colors.white12,
         ),
       ),
+      routes: {
+        '/': (context) => const LessonPage(),
+      },
     );
   }
 }
