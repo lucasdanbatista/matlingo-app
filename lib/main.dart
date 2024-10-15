@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'lesson_page.dart';
+import 'entities/unit.dart';
+import 'pages/unit_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -23,7 +24,7 @@ class MainApp extends StatelessWidget {
         ),
       ),
       routes: {
-        '/': (context) => const LessonPage(),
+        '/': (context) => UnitPage(unit: Unit.mock()),
       },
     );
   }

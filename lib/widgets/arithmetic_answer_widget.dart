@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'arithmetic_answer.dart';
+import '../entities/arithmetic_answer.dart';
 
 class ArithmeticAnswerWidget extends StatefulWidget {
   final ArithmeticAnswer answer;

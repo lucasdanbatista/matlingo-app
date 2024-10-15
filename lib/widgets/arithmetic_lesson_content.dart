@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
 
-import 'arithmetic_answer.dart';
+import '../entities/arithmetic_answer.dart';
+import '../entities/arithmetic_lesson.dart';
 import 'arithmetic_answer_widget.dart';
-import 'lesson.dart';
 
-class ArithmeticLessonContent extends StatelessWidget {
-  final Lesson<ArithmeticAnswer> lesson;
+class ArithmeticLessonContent extends StatefulWidget {
+  final ArithmeticLesson lesson;
+  final VoidCallback onComplete;
 
   const ArithmeticLessonContent({
     super.key,
     required this.lesson,
+    required this.onComplete,
   });
+
+  @override
+  State<ArithmeticLessonContent> createState() =>
+      _ArithmeticLessonContentState();
+}
+
+class _ArithmeticLessonContentState extends State<ArithmeticLessonContent> {
+  var selectedAnswers = <ArithmeticAnswer>[];
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,7 +56,7 @@ class ArithmeticLessonContent extends StatelessWidget {
                   children: [
                     Text.rich(
                       TextSpan(
-                        text: '${lesson.question} ',
+                        text: '${widget.lesson.question} ',
                         style: const TextStyle(
                           fontSize: 48,
                           fontWeight: FontWeight.w700,
@@ -83,22 +93,45 @@ class ArithmeticLessonContent extends StatelessWidget {
               ),
             ),
             GridView.count(
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
               crossAxisCount: 2,
-              children: lesson.answers
+              children: widget.lesson.answers
                   .map(
-                    (e) => ArithmeticAnswerWidget(
-                      answer: e,
-                      onTap: (selected) {},
+                    (answer) => ArithmeticAnswerWidget(
+                      answer: answer,
+                      onTap: (selected) => selected
+                          ? setState(() => selectedAnswers.add(answer))
+                          : setState(() => selectedAnswers.remove(answer)),
                     ),
                   )
                   .toList(),
             ),
             const Spacer(),
             FilledButton(
-              onPressed: () {},
+              onPressed: selectedAnswers.isNotEmpty
+                  ? () {
+                      if (widget.lesson.correctAnswers == selectedAnswers) {
+                        widget.onComplete();
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            backgroundColor: Colors.redAccent,
+                            content: Text(
+                              'Tente novamente.',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                    }
+                  : null,
               style: FilledButton.styleFrom(
                 minimumSize: const Size.fromHeight(56),
               ),
