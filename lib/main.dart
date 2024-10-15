@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:matlingo/lesson_page.dart';
+
+import 'lesson_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -12,9 +13,13 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        colorScheme: const ColorScheme.dark(
+        colorScheme: ColorScheme.dark(
           primary: Colors.blue,
-          inverseSurface: Colors.white12,
+          inverseSurface: Colors.white10,
+          surfaceContainer: Colors.blue.withOpacity(0.10),
+        ),
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          linearTrackColor: Colors.white12,
         ),
       ),
       routes: {
