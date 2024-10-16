@@ -27,7 +27,7 @@ class _UnitPageState extends State<UnitPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => throw UnimplementedError(),
           icon: const Icon(Icons.close),
         ),
         title: LinearProgressIndicator(
