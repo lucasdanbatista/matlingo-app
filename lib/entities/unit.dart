@@ -166,7 +166,7 @@ class Unit extends Equatable {
           ],
         ),
         ArithmeticLesson(
-          question: '32',
+          question: '0',
           correctAnswers: [
             ArithmeticAnswer(
               operand1: '0',
