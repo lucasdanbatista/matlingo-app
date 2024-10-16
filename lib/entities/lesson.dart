@@ -1,3 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-abstract class Lesson extends Equatable {}
+import 'answer.dart';
+
+abstract class Lesson extends Equatable {
+  bool isAnswersCorrect(List<Answer> answers);
+}

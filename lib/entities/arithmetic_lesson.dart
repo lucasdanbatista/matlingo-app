@@ -13,7 +13,18 @@ class ArithmeticLesson extends Lesson {
   });
 
   @override
-  List<Object?> get props => [
+  bool isAnswersCorrect(covariant List<ArithmeticAnswer> answers) {
+    if (correctAnswers.length != answers.length) return false;
+    for (final correctAnswer in correctAnswers) {
+      if (!answers.contains(correctAnswer)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  @override
+  List get props => [
         question,
         answers,
         correctAnswers,

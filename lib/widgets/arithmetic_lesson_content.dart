@@ -114,7 +114,7 @@ class _ArithmeticLessonContentState extends State<ArithmeticLessonContent> {
             FilledButton(
               onPressed: selectedAnswers.isNotEmpty
                   ? () {
-                      if (widget.lesson.correctAnswers == selectedAnswers) {
+                      if (widget.lesson.isAnswersCorrect(selectedAnswers)) {
                         widget.onComplete();
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(

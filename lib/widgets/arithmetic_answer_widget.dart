@@ -29,6 +29,7 @@ class _ArithmeticAnswerWidgetState extends State<ArithmeticAnswerWidget> {
       child: Container(
         height: 200,
         width: 200,
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
           border: Border.all(
@@ -39,20 +40,23 @@ class _ArithmeticAnswerWidgetState extends State<ArithmeticAnswerWidget> {
           ),
         ),
         child: Center(
-          child: Text.rich(
-            TextSpan(
-              text: widget.answer.operand1,
-              children: [
-                TextSpan(
-                  text: ' ${widget.answer.operator} ',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
+          child: FittedBox(
+            fit: BoxFit.fitWidth,
+            child: Text.rich(
+              TextSpan(
+                text: widget.answer.operand1,
+                children: [
+                  TextSpan(
+                    text: ' ${widget.answer.operator} ',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
-                ),
-                TextSpan(text: widget.answer.operand2),
-              ],
+                  TextSpan(text: widget.answer.operand2),
+                ],
+              ),
+              style: const TextStyle(fontSize: 40),
             ),
-            style: const TextStyle(fontSize: 40),
           ),
         ),
       ),

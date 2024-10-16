@@ -12,7 +12,7 @@ class ArithmeticAnswer extends Answer {
   });
 
   @override
-  List<Object?> get props => [
+  List get props => [
         operand1,
         operator,
         operand2,
