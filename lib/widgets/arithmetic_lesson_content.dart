@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../entities/arithmetic_answer.dart';
-import '../entities/arithmetic_lesson.dart';
+import '../core/entities/arithmetic_answer.dart';
+import '../core/entities/arithmetic_lesson.dart';
 import 'arithmetic_answer_widget.dart';
 
 class ArithmeticLessonContent extends StatefulWidget {

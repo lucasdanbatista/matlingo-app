@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 
-import 'entities/unit.dart';
-import 'pages/unit_page.dart';
+import 'utils/app_router.dart';
+import 'utils/dependency_injection.dart';
 
 void main() {
-  runApp(const MainApp());
+  injectDependencies();
+  runApp(
+    MainApp(
+      router: get(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final AppRouter router;
+
+  const MainApp({
+    super.key,
+    required this.router,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router.config(),
       theme: ThemeData(
         colorScheme: ColorScheme.dark(
           primary: Colors.blue,
@@ -21,11 +32,9 @@ class MainApp extends StatelessWidget {
         ),
         progressIndicatorTheme: const ProgressIndicatorThemeData(
           linearTrackColor: Colors.white12,
+          circularTrackColor: Colors.white12,
         ),
       ),
-      routes: {
-        '/': (context) => UnitPage(unit: Unit.mock()),
-      },
     );
   }
 }
