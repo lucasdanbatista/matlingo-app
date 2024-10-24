@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "564443813834",
+    "project_id": "matlingo-app",
+    "storage_bucket": "matlingo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564443813834:android:3e0a342c4f27af0485a133",
+        "android_client_info": {
+          "package_name": "br.com.caffeinestudio.matlingo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANAEJx7kvE06EJ6EdNrhoz23Ayor1QqTc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

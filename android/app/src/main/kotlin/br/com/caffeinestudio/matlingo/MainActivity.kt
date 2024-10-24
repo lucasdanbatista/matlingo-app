@@ -1,4 +1,4 @@
-package br.univali.matlingo
+package br.com.caffeinestudio.matlingo
 
 import io.flutter.embedding.android.FlutterActivity
 

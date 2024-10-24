@@ -1,17 +1,26 @@
+import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:math_expressions/math_expressions.dart';
 
-import 'answer.dart';
+part 'arithmetic_answer.g.dart';
 
-class ArithmeticAnswer extends Answer {
+@JsonSerializable()
+class ArithmeticAnswer extends Equatable {
   final String operand1;
   final String operator;
   final String operand2;
 
-  ArithmeticAnswer({
+  const ArithmeticAnswer({
     required this.operand1,
     required this.operator,
     required this.operand2,
   });
+
+  factory ArithmeticAnswer.fromJson(Map<String, dynamic> json) {
+    return _$ArithmeticAnswerFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() => _$ArithmeticAnswerToJson(this);
 
   @override
   String toString() => '$operand1 $operator $operand2';

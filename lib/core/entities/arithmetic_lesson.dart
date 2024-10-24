@@ -1,11 +1,21 @@
+import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:math_expressions/math_expressions.dart';
 
 import 'arithmetic_answer.dart';
-import 'lesson.dart';
 
-class ArithmeticLesson extends Lesson {
+part 'arithmetic_lesson.g.dart';
+
+@JsonSerializable()
+class ArithmeticLesson extends Equatable {
   final String question;
   final List<ArithmeticAnswer> answers;
+
+  factory ArithmeticLesson.fromJson(Map<String, dynamic> json) {
+    return _$ArithmeticLessonFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() => _$ArithmeticLessonToJson(this);
 
   List<ArithmeticAnswer> get correctAnswers {
     return answers
@@ -20,12 +30,11 @@ class ArithmeticLesson extends Lesson {
         .toList();
   }
 
-  ArithmeticLesson({
+  const ArithmeticLesson({
     required this.question,
     required this.answers,
   });
 
-  @override
   bool isAnswersCorrect(covariant List<ArithmeticAnswer> answers) {
     if (correctAnswers.length != answers.length) return false;
     for (final answer in answers) {
