@@ -1,12 +1,11 @@
-import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'arithmetic_lesson.dart';
 
 part 'unit.g.dart';
 
-@JsonSerializable()
-class Unit extends Equatable {
+@JsonSerializable(explicitToJson: true)
+class Unit {
   final String id;
   final List<ArithmeticLesson> lessons;
   final List<ArithmeticLesson> completedLessons;
@@ -26,7 +25,4 @@ class Unit extends Equatable {
   double get progress => completedLessons.length / lessons.length;
 
   bool get isCompleted => progress == 1;
-
-  @override
-  List get props => [id, lessons];
 }

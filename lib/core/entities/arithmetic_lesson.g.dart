@@ -17,5 +17,5 @@ ArithmeticLesson _$ArithmeticLessonFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$ArithmeticLessonToJson(ArithmeticLesson instance) =>
     <String, dynamic>{
       'question': instance.question,
-      'answers': instance.answers,
+      'answers': instance.answers.map((e) => e.toJson()).toList(),
     };

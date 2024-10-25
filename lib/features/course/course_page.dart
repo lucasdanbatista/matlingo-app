@@ -42,6 +42,7 @@ class CoursePage extends StatelessWidget {
                   padding: padding,
                   child: UnitIcon(
                     unit: unit,
+                    course: controller.course!,
                     isUnlocked: previous?.isCompleted ?? true,
                   ),
                 ),

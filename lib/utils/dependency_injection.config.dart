@@ -26,12 +26,13 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i159.UnitController>(() => _i159.UnitController());
     gh.lazySingleton<_i443.AppRouter>(() => _i443.AppRouter());
     gh.lazySingleton<_i562.CourseRepository>(
         () => _i562.FirebaseCourseRepository());
     gh.lazySingleton<_i119.CourseController>(
         () => _i119.CourseController(gh<_i562.CourseRepository>()));
+    gh.factory<_i159.UnitController>(
+        () => _i159.UnitController(gh<_i562.CourseRepository>()));
     return this;
   }
 }

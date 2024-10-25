@@ -2,7 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../../core/entities/arithmetic_lesson.dart';
+import '../../core/entities/course.dart';
 import '../../core/entities/unit.dart';
 import '../../utils/cron.dart';
 import '../../utils/dependency_injection.dart';
@@ -12,12 +12,14 @@ import 'unit_controller.dart';
 
 @RoutePage()
 class UnitPage extends StatelessWidget {
+  final Course course;
   final Unit unit;
   final pageController = PageController();
   final controller = get<UnitController>();
 
   UnitPage({
     super.key,
+    required this.course,
     required this.unit,
   });
 
@@ -41,25 +43,23 @@ class UnitPage extends StatelessWidget {
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: unit.lessons.map((lesson) {
-          if (lesson is ArithmeticLesson) {
-            return ArithmeticLessonContent(
-              lesson: lesson,
-              onComplete: () {
-                unit.completedLessons.add(lesson);
-                controller.setProgress(unit.progress);
-                if (controller.progress == 1) {
+          return ArithmeticLessonContent(
+            lesson: lesson,
+            onComplete: () async {
+              await controller.completeLesson(course, unit, lesson);
+              if (controller.progress == 1) {
+                if (context.mounted) {
                   Navigator.pop(context);
-                  get<CourseController>().refresh();
-                } else {
-                  pageController.nextPage(
-                    duration: 600.milliseconds,
-                    curve: Curves.ease,
-                  );
                 }
-              },
-            );
-          }
-          return const SizedBox.square();
+                await get<CourseController>().fetchUnits();
+              } else {
+                pageController.nextPage(
+                  duration: 600.milliseconds,
+                  curve: Curves.ease,
+                );
+              }
+            },
+          );
         }).toList(),
       ),
     );

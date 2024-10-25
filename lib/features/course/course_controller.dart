@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../core/entities/course.dart';
 import '../../core/entities/unit.dart';
 import '../../core/repositories/course_repository.dart';
 
@@ -17,13 +18,13 @@ abstract class CourseControllerBase with Store {
   @observable
   List<Unit> units = ObservableList();
 
-  @action
-  Future<void> fetchUnits() async {
-    units = ObservableList.of(await _repository.findUnits());
-  }
+  @observable
+  Course? course;
 
   @action
-  Future<void> refresh() async {
-    units = ObservableList.of(units);
+  Future<void> fetchUnits() async {
+    final courses = await _repository.findCourses();
+    course = courses.first;
+    units = ObservableList.of(course!.units);
   }
 }

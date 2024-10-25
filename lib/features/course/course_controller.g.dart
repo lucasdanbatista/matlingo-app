@@ -25,6 +25,22 @@ mixin _$CourseController on CourseControllerBase, Store {
     });
   }
 
+  late final _$courseAtom =
+      Atom(name: 'CourseControllerBase.course', context: context);
+
+  @override
+  Course? get course {
+    _$courseAtom.reportRead();
+    return super.course;
+  }
+
+  @override
+  set course(Course? value) {
+    _$courseAtom.reportWrite(value, super.course, () {
+      super.course = value;
+    });
+  }
+
   late final _$fetchUnitsAsyncAction =
       AsyncAction('CourseControllerBase.fetchUnits', context: context);
 
@@ -33,18 +49,11 @@ mixin _$CourseController on CourseControllerBase, Store {
     return _$fetchUnitsAsyncAction.run(() => super.fetchUnits());
   }
 
-  late final _$refreshAsyncAction =
-      AsyncAction('CourseControllerBase.refresh', context: context);
-
-  @override
-  Future<void> refresh() {
-    return _$refreshAsyncAction.run(() => super.refresh());
-  }
-
   @override
   String toString() {
     return '''
-units: ${units}
+units: ${units},
+course: ${course}
     ''';
   }
 }

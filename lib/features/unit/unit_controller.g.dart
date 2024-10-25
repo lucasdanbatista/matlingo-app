@@ -25,18 +25,14 @@ mixin _$UnitController on UnitControllerBase, Store {
     });
   }
 
-  late final _$UnitControllerBaseActionController =
-      ActionController(name: 'UnitControllerBase', context: context);
+  late final _$completeLessonAsyncAction =
+      AsyncAction('UnitControllerBase.completeLesson', context: context);
 
   @override
-  void setProgress(double value) {
-    final _$actionInfo = _$UnitControllerBaseActionController.startAction(
-        name: 'UnitControllerBase.setProgress');
-    try {
-      return super.setProgress(value);
-    } finally {
-      _$UnitControllerBaseActionController.endAction(_$actionInfo);
-    }
+  Future<void> completeLesson(
+      Course course, Unit unit, ArithmeticLesson lesson) {
+    return _$completeLessonAsyncAction
+        .run(() => super.completeLesson(course, unit, lesson));
   }
 
   @override

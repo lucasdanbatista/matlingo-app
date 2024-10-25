@@ -4,7 +4,7 @@ import 'package:math_expressions/math_expressions.dart';
 
 part 'arithmetic_answer.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ArithmeticAnswer extends Equatable {
   final String operand1;
   final String operator;

@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i3;
 import 'package:flutter/material.dart' as _i4;
-import 'package:matlingo/core/entities/unit.dart' as _i5;
+import 'package:matlingo/core/entities/course.dart' as _i5;
+import 'package:matlingo/core/entities/unit.dart' as _i6;
 import 'package:matlingo/features/course/course_page.dart' as _i1;
 import 'package:matlingo/features/unit/unit_page.dart' as _i2;
 
@@ -54,12 +55,14 @@ class CourseRouteArgs {
 class UnitRoute extends _i3.PageRouteInfo<UnitRouteArgs> {
   UnitRoute({
     _i4.Key? key,
-    required _i5.Unit unit,
+    required _i5.Course course,
+    required _i6.Unit unit,
     List<_i3.PageRouteInfo>? children,
   }) : super(
           UnitRoute.name,
           args: UnitRouteArgs(
             key: key,
+            course: course,
             unit: unit,
           ),
           initialChildren: children,
@@ -73,6 +76,7 @@ class UnitRoute extends _i3.PageRouteInfo<UnitRouteArgs> {
       final args = data.argsAs<UnitRouteArgs>();
       return _i2.UnitPage(
         key: args.key,
+        course: args.course,
         unit: args.unit,
       );
     },
@@ -82,15 +86,18 @@ class UnitRoute extends _i3.PageRouteInfo<UnitRouteArgs> {
 class UnitRouteArgs {
   const UnitRouteArgs({
     this.key,
+    required this.course,
     required this.unit,
   });
 
   final _i4.Key? key;
 
-  final _i5.Unit unit;
+  final _i5.Course course;
+
+  final _i6.Unit unit;
 
   @override
   String toString() {
-    return 'UnitRouteArgs{key: $key, unit: $unit}';
+    return 'UnitRouteArgs{key: $key, course: $course, unit: $unit}';
   }
 }

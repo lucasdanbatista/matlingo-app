@@ -6,7 +6,7 @@ import 'arithmetic_answer.dart';
 
 part 'arithmetic_lesson.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ArithmeticLesson extends Equatable {
   final String question;
   final List<ArithmeticAnswer> answers;

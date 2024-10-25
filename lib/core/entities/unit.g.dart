@@ -18,6 +18,7 @@ Unit _$UnitFromJson(Map<String, dynamic> json) => Unit(
 
 Map<String, dynamic> _$UnitToJson(Unit instance) => <String, dynamic>{
       'id': instance.id,
-      'lessons': instance.lessons,
-      'completedLessons': instance.completedLessons,
+      'lessons': instance.lessons.map((e) => e.toJson()).toList(),
+      'completedLessons':
+          instance.completedLessons.map((e) => e.toJson()).toList(),
     };
