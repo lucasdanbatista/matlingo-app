@@ -7,7 +7,7 @@ import 'core/entities/course.dart';
 import 'core/entities/unit.dart';
 
 Future<Course> mockBasicMathCourse() async {
-  return Course(
+  final course = Course(
     id: 'basic-math',
     units: [
       Unit(
@@ -295,4 +295,5 @@ Future<Course> mockBasicMathCourse() async {
   await FirebaseFirestore.instance
       .doc('courses/basic-math')
       .set(course.toJson());
+  return course;
 }
