@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
+import 'package:matlingo/core/entities/unit.dart';
 
 import '../entities/arithmetic_lesson.dart';
 import '../entities/course.dart';
@@ -9,7 +10,7 @@ import '../entities/student.dart';
 abstract interface class CourseRepository {
   Future<List<Course>> findCourses();
 
-  Future<double> completeLesson({
+  Future<Unit> completeLesson({
     required String courseId,
     required String unitId,
     required ArithmeticLesson lesson,
@@ -28,7 +29,7 @@ class FirebaseCourseRepository implements CourseRepository {
       await _findStudent() ?? await _createStudent();
 
   @override
-  Future<double> completeLesson({
+  Future<Unit> completeLesson({
     required String courseId,
     required String unitId,
     required ArithmeticLesson lesson,
@@ -41,7 +42,7 @@ class FirebaseCourseRepository implements CourseRepository {
     unit.completedLessons.add(lesson);
     final doc = '/students/${FirebaseAuth.instance.currentUser!.uid}';
     await FirebaseFirestore.instance.doc(doc).set(student.toJson());
-    return unit.progress;
+    return unit;
   }
 
   Future<List<Course>> _findCourses() async {

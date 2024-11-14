@@ -14,14 +14,18 @@ import 'unit_controller.dart';
 class UnitPage extends StatelessWidget {
   final Course course;
   final Unit unit;
-  final pageController = PageController();
+  late final pageController = PageController(
+    initialPage: unit.nextUncompletedLessonIndex,
+  );
   final controller = get<UnitController>();
 
   UnitPage({
     super.key,
     required this.course,
     required this.unit,
-  });
+  }) {
+    controller.setUnit(unit);
+  }
 
   @override
   Widget build(BuildContext context) {

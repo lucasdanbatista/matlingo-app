@@ -22,6 +22,12 @@ class Unit {
     required this.completedLessons,
   });
 
+  int get nextUncompletedLessonIndex {
+    if (completedLessons.isEmpty) return 0;
+    final index = completedLessons.indexOf(completedLessons.last);
+    return index + 1;
+  }
+
   double get progress => completedLessons.length / lessons.length;
 
   bool get isCompleted => progress == 1;
