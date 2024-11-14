@@ -33,6 +33,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.dark(
           primary: Colors.blue,
+          secondary: Colors.orange,
           inverseSurface: Colors.white10,
           surfaceContainer: Colors.blue.withOpacity(0.10),
         ),

@@ -7,10 +7,12 @@ part 'course.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Course {
   final String id;
+  final String title;
   final List<Unit> units;
 
   const Course({
     required this.id,
+    required this.title,
     required this.units,
   });
 

@@ -65,5 +65,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'matlingo-app.appspot.com',
     iosBundleId: 'br.com.caffeinestudio.matlingo',
   );
-
 }
