@@ -9,27 +9,19 @@ part of 'unit_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$UnitController on UnitControllerBase, Store {
-  Computed<double>? _$progressComputed;
+  late final _$progressAtom =
+      Atom(name: 'UnitControllerBase.progress', context: context);
 
   @override
-  double get progress =>
-      (_$progressComputed ??= Computed<double>(() => super.progress,
-              name: 'UnitControllerBase.progress'))
-          .value;
-
-  late final _$unitAtom =
-      Atom(name: 'UnitControllerBase.unit', context: context);
-
-  @override
-  Unit? get unit {
-    _$unitAtom.reportRead();
-    return super.unit;
+  double get progress {
+    _$progressAtom.reportRead();
+    return super.progress;
   }
 
   @override
-  set unit(Unit? value) {
-    _$unitAtom.reportWrite(value, super.unit, () {
-      super.unit = value;
+  set progress(double value) {
+    _$progressAtom.reportWrite(value, super.progress, () {
+      super.progress = value;
     });
   }
 
@@ -47,11 +39,11 @@ mixin _$UnitController on UnitControllerBase, Store {
       ActionController(name: 'UnitControllerBase', context: context);
 
   @override
-  void setUnit(Unit value) {
+  void setProgress(double value) {
     final _$actionInfo = _$UnitControllerBaseActionController.startAction(
-        name: 'UnitControllerBase.setUnit');
+        name: 'UnitControllerBase.setProgress');
     try {
-      return super.setUnit(value);
+      return super.setProgress(value);
     } finally {
       _$UnitControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -60,7 +52,6 @@ mixin _$UnitController on UnitControllerBase, Store {
   @override
   String toString() {
     return '''
-unit: ${unit},
 progress: ${progress}
     ''';
   }

@@ -24,7 +24,7 @@ class UnitPage extends StatelessWidget {
     required this.course,
     required this.unit,
   }) {
-    controller.setUnit(unit);
+    controller.setProgress(unit.progress);
   }
 
   @override
@@ -51,11 +51,11 @@ class UnitPage extends StatelessWidget {
             lesson: lesson,
             onComplete: () async {
               await controller.completeLesson(course, unit, lesson);
+              await get<CourseController>().fetchUnits();
               if (controller.progress == 1) {
                 if (context.mounted) {
                   Navigator.pop(context);
                 }
-                await get<CourseController>().fetchUnits();
               } else {
                 pageController.nextPage(
                   duration: 600.milliseconds,

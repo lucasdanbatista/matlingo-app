@@ -1,20 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-import 'package:matlingo/core/entities/unit.dart';
 
-import '../entities/arithmetic_lesson.dart';
 import '../entities/course.dart';
 import '../entities/student.dart';
 
 abstract interface class CourseRepository {
   Future<List<Course>> findCourses();
 
-  Future<Unit> completeLesson({
-    required String courseId,
-    required String unitId,
-    required ArithmeticLesson lesson,
-  });
+  Future<void> updateStudentCourse(Course course);
 }
 
 @LazySingleton(as: CourseRepository)
@@ -29,20 +23,12 @@ class FirebaseCourseRepository implements CourseRepository {
       await _findStudent() ?? await _createStudent();
 
   @override
-  Future<Unit> completeLesson({
-    required String courseId,
-    required String unitId,
-    required ArithmeticLesson lesson,
-  }) async {
-    final student = await _getStudent();
-    final unit = student.courses
-        .firstWhere((e) => e.id == courseId)
-        .units
-        .firstWhere((e) => e.id == unitId);
-    unit.completedLessons.add(lesson);
+  Future<void> updateStudentCourse(Course course) async {
     final doc = '/students/${FirebaseAuth.instance.currentUser!.uid}';
+    final student = await _getStudent();
+    student.courses.remove(course);
+    student.courses.add(course);
     await FirebaseFirestore.instance.doc(doc).set(student.toJson());
-    return unit;
   }
 
   Future<List<Course>> _findCourses() async {

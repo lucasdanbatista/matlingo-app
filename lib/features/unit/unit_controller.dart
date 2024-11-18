@@ -16,14 +16,11 @@ abstract class UnitControllerBase with Store {
 
   UnitControllerBase(this._courseRepository);
 
-  @computed
-  double get progress => unit?.progress ?? 0;
-
   @observable
-  Unit? unit;
+  double progress = 0;
 
   @action
-  void setUnit(Unit value)=> unit = value;
+  void setProgress(double value) => progress = value;
 
   @action
   Future<void> completeLesson(
@@ -31,10 +28,8 @@ abstract class UnitControllerBase with Store {
     Unit unit,
     ArithmeticLesson lesson,
   ) async {
-    unit = await _courseRepository.completeLesson(
-      courseId: course.id,
-      unitId: unit.id,
-      lesson: lesson,
-    );
+    unit.completedLessons.add(lesson);
+    await _courseRepository.updateStudentCourse(course);
+    setProgress(unit.progress);
   }
 }

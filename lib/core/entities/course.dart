@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'unit.dart';
@@ -5,7 +6,7 @@ import 'unit.dart';
 part 'course.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Course {
+class Course extends Equatable {
   final String id;
   final String title;
   final List<Unit> units;
@@ -19,4 +20,7 @@ class Course {
   factory Course.fromJson(Map<String, dynamic> json) => _$CourseFromJson(json);
 
   Map<String, dynamic> toJson() => _$CourseToJson(this);
+
+  @override
+  List<Object?> get props => [id];
 }
