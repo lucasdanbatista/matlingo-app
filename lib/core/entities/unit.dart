@@ -10,6 +10,7 @@ class Unit extends Equatable {
   final String id;
   final List<ArithmeticLesson> lessons;
   final List<ArithmeticLesson> completedLessons;
+  bool alreadyCompleted;
 
   factory Unit.fromJson(Map<String, dynamic> json) {
     return _$UnitFromJson(json);
@@ -17,14 +18,16 @@ class Unit extends Equatable {
 
   Map<String, dynamic> toJson() => _$UnitToJson(this);
 
-  const Unit({
+  Unit({
     required this.id,
     required this.lessons,
     required this.completedLessons,
+    this.alreadyCompleted = false,
   });
 
-  int get nextUncompletedLessonIndex {
+  int get initialLessonIndex {
     if (completedLessons.isEmpty) return 0;
+    if (completedLessons.length == lessons.length) return 0;
     final index = completedLessons.indexOf(completedLessons.last);
     if (index == lessons.length - 1) return index;
     return index + 1;

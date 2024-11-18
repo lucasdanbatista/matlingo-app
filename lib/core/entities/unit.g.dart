@@ -14,6 +14,7 @@ Unit _$UnitFromJson(Map<String, dynamic> json) => Unit(
       completedLessons: (json['completedLessons'] as List<dynamic>)
           .map((e) => ArithmeticLesson.fromJson(e as Map<String, dynamic>))
           .toList(),
+      alreadyCompleted: json['alreadyCompleted'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$UnitToJson(Unit instance) => <String, dynamic>{
@@ -21,4 +22,5 @@ Map<String, dynamic> _$UnitToJson(Unit instance) => <String, dynamic>{
       'lessons': instance.lessons.map((e) => e.toJson()).toList(),
       'completedLessons':
           instance.completedLessons.map((e) => e.toJson()).toList(),
+      'alreadyCompleted': instance.alreadyCompleted,
     };

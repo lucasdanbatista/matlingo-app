@@ -23,12 +23,23 @@ abstract class UnitControllerBase with Store {
   void setProgress(double value) => progress = value;
 
   @action
+  Future<void> resetUnit(Course course, Unit unit) async {
+    unit.completedLessons.clear();
+    unit.alreadyCompleted = false;
+    await _courseRepository.updateStudentCourse(course);
+    setProgress(0);
+  }
+
+  @action
   Future<void> completeLesson(
     Course course,
     Unit unit,
     ArithmeticLesson lesson,
   ) async {
     unit.completedLessons.add(lesson);
+    if (unit.progress == 1) {
+      unit.alreadyCompleted = true;
+    }
     await _courseRepository.updateStudentCourse(course);
     setProgress(unit.progress);
   }

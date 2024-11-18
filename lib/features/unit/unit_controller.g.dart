@@ -25,6 +25,14 @@ mixin _$UnitController on UnitControllerBase, Store {
     });
   }
 
+  late final _$resetUnitAsyncAction =
+      AsyncAction('UnitControllerBase.resetUnit', context: context);
+
+  @override
+  Future<void> resetUnit(Course course, Unit unit) {
+    return _$resetUnitAsyncAction.run(() => super.resetUnit(course, unit));
+  }
+
   late final _$completeLessonAsyncAction =
       AsyncAction('UnitControllerBase.completeLesson', context: context);
 

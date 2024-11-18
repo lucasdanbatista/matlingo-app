@@ -15,7 +15,7 @@ class UnitPage extends StatelessWidget {
   final Course course;
   final Unit unit;
   late final pageController = PageController(
-    initialPage: unit.nextUncompletedLessonIndex,
+    initialPage: unit.initialLessonIndex,
   );
   final controller = get<UnitController>();
 
@@ -24,7 +24,11 @@ class UnitPage extends StatelessWidget {
     required this.course,
     required this.unit,
   }) {
-    controller.setProgress(unit.progress);
+    if (unit.alreadyCompleted) {
+      controller.resetUnit(course, unit);
+    } else {
+      controller.setProgress(unit.progress);
+    }
   }
 
   @override

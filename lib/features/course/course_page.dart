@@ -54,16 +54,13 @@ class CoursePage extends StatelessWidget {
                 } else if (position % 8 == 3) {
                   padding = const EdgeInsets.only(left: distance * 3);
                 }
-                final previous = controller.units.indexOf(unit) == 0
-                    ? null
-                    : controller.units[controller.units.indexOf(unit) - 1];
                 return Center(
                   child: Padding(
                     padding: padding,
                     child: UnitIcon(
                       unit: unit,
                       course: controller.course!,
-                      isUnlocked: previous?.isCompleted ?? true,
+                      isUnlocked: true,
                     ),
                   ),
                 );
