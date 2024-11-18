@@ -24,11 +24,16 @@ class UnitPage extends StatelessWidget {
     required this.course,
     required this.unit,
   }) {
+    _fetchProgress();
+  }
+
+  Future<void> _fetchProgress() async {
     if (unit.alreadyCompleted) {
-      controller.resetUnit(course, unit);
+      await controller.resetUnit(course, unit);
     } else {
       controller.setProgress(unit.progress);
     }
+    await get<CourseController>().fetchUnits();
   }
 
   @override
